@@ -1,0 +1,55 @@
+
+<title>The URL parse test</title>
+
+<p>
+    This is a test page for the URL parser.
+</p>
+<p>
+    I recently found that some URL implementation parse <code>vcc://vpm/addRepo?url=https%3A%2F%2Fvpm.anatawa12.com%2Fvpm.json</code>
+    as URL with <code>//vpm/addRepo</code> as pathname and no host and some other implementation parse it as that 
+    with <code>vpm</code> as host and <code>/addRepo</code> as pathname.
+</p>
+<p>
+    This page is to test how the URL parser in the browser parses the URL.
+</p>
+
+<label>url: <input id="url" value="vcc://vpm/addRepo?url=https%3A%2F%2Fvpm.anatawa12.com%2Fvpm.json"></label>
+<button onclick="parse()">parse</button>
+<table>
+    <tr><th>key</th><th>value</th></tr>
+    <tr><td>href</td><td id="href"></td></tr>
+    <tr><td>origin</td><td id="origin"></td></tr>
+    <tr><td>protocol</td><td id="protocol"></td></tr>
+    <tr><td>username</td><td id="username"></td></tr>
+    <tr><td>password</td><td id="password"></td></tr>
+    <tr><td>host</td><td id="host"></td></tr>
+    <tr><td>hostname</td><td id="hostname"></td></tr>
+    <tr><td>port</td><td id="port"></td></tr>
+    <tr><td>pathname</td><td id="pathname"></td></tr>
+    <tr><td>search</td><td id="search"></td></tr>
+</table>
+<script>
+    function normalize(value) {
+        if (value === null) return "<null>";
+        if (value === undefined) return "<undefined>";
+        return value;
+    }
+
+    function parse() {
+        const url = document.getElementById("url").value;
+        const parsed = new URL(url);
+        console.log(parsed);
+
+        document.getElementById("href").innerText = normalize(parsed.href);
+        document.getElementById("origin").innerText = normalize(parsed.origin);
+        document.getElementById("protocol").innerText = normalize(parsed.protocol);
+        document.getElementById("username").innerText = normalize(parsed.username);
+        document.getElementById("password").innerText = normalize(parsed.password);
+        document.getElementById("host").innerText = normalize(parsed.host);
+        document.getElementById("hostname").innerText = normalize(parsed.hostname);
+        document.getElementById("port").innerText = normalize(parsed.port);
+        document.getElementById("pathname").innerText = normalize(parsed.pathname);
+        document.getElementById("search").innerText = normalize(parsed.search);
+    }
+    parse();
+</script>
